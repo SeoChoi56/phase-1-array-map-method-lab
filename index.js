@@ -12,5 +12,34 @@ const tutorials = [
 ];
 
 const titleCased = () => {
-  return tutorials
+  let holderArray = []
+  const newTutorials = []
+  let wordContainer = '';
+  let sentenceContainer = '';
+  for(let i = 0; i < tutorials.length; i++ ){
+    //split each sentence into words
+    holderArray = (tutorials[i].split(' '))
+    for(let i = 0; i < holderArray.length; i++) {
+      //Capitalize first letter and combines with rest of the letters of the word
+      //stores the capitalized word in a container
+      wordContainer = holderArray[i][0].toUpperCase() + holderArray[i].slice(1);
+      //if it is first word then word is stored in sentence container
+      //else the word is added onto previous existing words
+      if(i === 0){
+        sentenceContainer = wordContainer
+      }else {
+        sentenceContainer = sentenceContainer + ' ' + wordContainer
+      }
+      //resets word container for next iteration
+      wordContainer = ''
+    }
+    //pushes the capitalized title of books to a new array
+    newTutorials.push(sentenceContainer)
+    //resets the sentence for next title
+    sentenceContainer = '';
+  }
+
+  return newTutorials
 }
+
+console.log(tutorials.map(titleCased))
